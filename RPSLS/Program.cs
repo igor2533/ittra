@@ -10,304 +10,97 @@ namespace ROCKPAPERSCISSORS
     {
 
 
-
-        static void Restart()
-        {
-            String[] n = new String[10];
-            n[0] = "hi";
-            Main(n);
-        }
-
-
-
-
-        static string calcHmac(string data)
-        {
-
-            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
-
-            // Buffer storage.
-            byte[] bra = new byte[16];
-            // Ten iterations.
-            rng.GetBytes(bra);
-            string my_key = BitConverter.ToString(bra, 0);
-
-
-            byte[] key = Encoding.ASCII.GetBytes(my_key);
-                HMACSHA1 myhmacsha256 = new HMACSHA1(key);
-                byte[] byteArray = Encoding.ASCII.GetBytes(data);
-                System.IO.MemoryStream stream = new System.IO.MemoryStream(byteArray);
-                string result = myhmacsha256.ComputeHash(stream).Aggregate("", (s, e) => s + String.Format("{0:x2}", e), s => s);
-                //Console.WriteLine(result);
-                return result;
-
-
-
-    
-
-        
-        }
-
-      
-
         static void Main(string[] args)
         {
 
-
-          
-               
-           
-
-
-
-
-            Console.Write("Введите строки: ");
-            string input = Console.ReadLine();
-            string[] share = input.Split(' ');
-        
-            string[] shufled = share.OrderBy(n => Guid.NewGuid()).ToArray();
-
-
-            int count_s = share.Length;
-            var uniqueItemsList = share.Distinct().ToList();
-            int count_unic = uniqueItemsList.Count;
-            if (count_s >= 3 && count_s% 2 == 1 && count_unic == count_s)
+            int pros = 0;
+            int ncs = 0;
+            if (args.Length >= 3 & args.Length % 2 != 0)
             {
-
-           
-
-
-
-                foreach (string s in shufled)
+                for (int c = 1; c < args.Length; c++)
                 {
-
-
-
-                    
-
-
-                    switch (s)
+                    if (args[pros] == args[c])
                     {
-                     
-                        case "A":
-                          
-                            string stepA = "PC select A";
-                            // Console.WriteLine(calcHmac(stepA));
-                          
-                            string hmac = calcHmac(stepA);
-
-                            Console.Write("Введите свою букву:");
-                                string SelUs = Console.ReadLine();
-                            if (SelUs == "A")
-                            {
-                               goto case "A";
-                            }
-                            if (SelUs == "B" | SelUs == "C" | SelUs == "D")
-                                {
-                                    Console.WriteLine("PC move: A "+ "USER MOVE: " + SelUs+" USER WIN");
-                                }
-                                if (SelUs == "E" | SelUs == "F" | SelUs == "G")
-                                {
-                                Console.WriteLine("PC move: A " + "USER MOVE: " + SelUs + " PC WIN");
-                            }
-                          
-                            
-                            break;
-
-                           
-                        case "B":
-                            string stepB = "PC select B ";
-                           Console.WriteLine(calcHmac(stepB));
-
-                            Console.Write("Введите свою букву:");
-                            string SelUsB = Console.ReadLine();
-                            if (SelUsB == "B")
-                            {
-                                goto case "B";
-                            }
-                        
-
-                            if (SelUsB == "A"  | SelUsB == "F" | SelUsB == "G")
-                            {
-                                Console.WriteLine("PC move: B " + "USER MOVE: " + SelUsB + " PC WIN");
-                            }
-                            if (SelUsB == "C" | SelUsB == "D" | SelUsB == "E")
-                            {
-                                Console.WriteLine("PC move: B " + "USER MOVE: " + SelUsB + " USER WIN");
-                            }
-                          
-                            break;
-
-
-
-
-                        case "C":
-
-
-                            string stepC = "PC select C ";
-                            Console.WriteLine(calcHmac(stepC));
-
-                            Console.Write("Введите свою букву:");
-                            string SelUsC = Console.ReadLine();
-
-                            if (SelUsC == "C")
-                            {
-                                goto case "C";
-                            }
-
-
-                            if (SelUsC == "B" | SelUsC == "A" | SelUsC == "G")
-                            {
-                                Console.WriteLine("PC move: C " + "USER MOVE: " + SelUsC + " PC WIN");
-                            }
-                            if (SelUsC == "D" | SelUsC == "E" | SelUsC == "F")
-                            {
-                                Console.WriteLine("PC move: C " + "USER MOVE: " + SelUsC + " USER WIN");
-                            }
-                          
-                            break;
-
-                        case "D":
-
-
-                            string stepD = "PC select D";
-                            Console.WriteLine(calcHmac(stepD));
-
-                            Console.Write("Введите свою букву:");
-                            string SelUsD = Console.ReadLine();
-
-                            if (SelUsD == "D")
-                            {
-                                goto case "D";
-                            }
-
-
-                            if (SelUsD == "C" | SelUsD == "B" | SelUsD == "A")
-                            {
-                                Console.WriteLine("PC move: D " + "USER MOVE: " + SelUsD + " PC WIN");
-                            }
-                            if (SelUsD == "E" | SelUsD == "F" | SelUsD == "G")
-                            {
-                                Console.WriteLine("PC move: D " + "USER MOVE: " + SelUsD + " USER WIN");
-                            }
-                           
-                            break;
-
-
-
-                        case "E":
-
-
-                            string stepE = "PC select E";
-                            Console.WriteLine(calcHmac(stepE));
-
-                            Console.Write("Введите свою букву:");
-                            string SelUsE = Console.ReadLine();
-
-                            if (SelUsE == "E")
-                            {
-                                goto case "E";
-                            }
-
-
-                            if (SelUsE == "B" | SelUsE == "C" | SelUsE == "D")
-                            {
-                                Console.WriteLine("PC move: E " + "USER MOVE: " + SelUsE + " PC WIN");
-                            }
-                            if (SelUsE == "F" | SelUsE == "G" | SelUsE == "A")
-                            {
-                                Console.WriteLine("PC move: E " + "USER MOVE: " + SelUsE + " USER WIN");
-                            }
-                            
-                            break;
-
-
-
-                        case "F":
-
-
-                            string stepF = "PC select F";
-                            Console.WriteLine(calcHmac(stepF));
-
-                            Console.Write("Введите свою букву:");
-                            string SelUsF = Console.ReadLine();
-
-                            if (SelUsF == "F")
-                            {
-                                goto case "F";
-                            }
-
-                            if (SelUsF == "C" | SelUsF == "D" | SelUsF == "E")
-                            {
-                                Console.WriteLine("PC move: F " + "USER MOVE: " + SelUsF + " PC WIN");
-                            }
-                            if (SelUsF == "G" | SelUsF == "A" | SelUsF == "B")
-                            {
-                                Console.WriteLine("PC move: F " + "USER MOVE: " + SelUsF + " USER WIN");
-                            }
-                            
-                            break;
-
-
-                        case "G":
-
-
-                            string stepG = "PC select G";
-                            Console.WriteLine(calcHmac(stepG));
-
-                            Console.Write("Введите свою букву:");
-                            string SelUsG = Console.ReadLine();
-
-                            if (SelUsG == "G")
-                            {
-                                goto case "G";
-                            }
-
-
-                            if (SelUsG == "D" | SelUsG == "E" | SelUsG == "F")
-                            {
-                                Console.WriteLine("PC move: G " + "USER MOVE: " + SelUsG + " PC WIN");
-                            }
-                            if (SelUsG == "A" | SelUsG == "B" | SelUsG == "C")
-                            {
-                                Console.WriteLine("PC move: G " + "USER MOVE: " + SelUsG + " USER WIN");
-                            }
-                            
-                            break;
-
-
-
-
-
-
-
+                        Console.WriteLine("Arguments not unique");
+                        Environment.Exit(0);
                     }
-
-
-
-
-
-
+                    if (c == 4 && args[pros] != args[pros + 1])
+                    {
+                        pros++;
+                        c = pros;
+                    }
                 }
-
-
-
             }
-             else
+            else
             {
-                Console.WriteLine("Ошибка");
-                Restart();
-
+                Console.WriteLine("Error");
+                Environment.Exit(0);
             }
+            RNGCryptoServiceProvider csp = new RNGCryptoServiceProvider();
+              byte[] bra = new byte[16];
+              csp.GetBytes(bra);
+              string my_key = BitConverter.ToString(bra).Replace("-", string.Empty).ToLower();
+              int op = 1;
+              int length = args.Length;
+              int saq = length / 2;
+              Random randooms = new Random();
+              int value = randooms.Next(1, args.Length + 1);
+              byte[] bkey = Encoding.Default.GetBytes(my_key);
+              var pc_hmac = new HMACSHA1(bkey);
+              byte[] getbytes = Encoding.Default.GetBytes(args[value-1]);
+              var hashpc = pc_hmac.ComputeHash(getbytes);
+              Console.WriteLine("HMAC "+ BitConverter.ToString(hashpc).Replace("-", string.Empty).ToLower());
+              Console.WriteLine("0" + " - " + "Exit");
+              foreach (var s in args)
+              {
+                Console.WriteLine(op + " - " + s.ToString());
+                op++;
+              }
+              Console.WriteLine("PC select: " + value);
+              Console.WriteLine("Select one arg");
+              ncs = Convert.ToInt32(Console.ReadLine());
+              if (ncs == 0)
+              {
+                Environment.Exit(0);
+                Console.WriteLine("THE END");
+              }
+              int ce = ncs;
+              int eqy = value;
+              int ute = ncs;
+              int kd = value;
+              for (int i = 0; i <= saq; i++)
+              {
+                if (ce == eqy & i == 0)
+                {
+                    break;
+                }
+                else
+                if (ce == eqy)
+                {
+                    Console.WriteLine("PC WIN");
+                    i = saq + 1;
+                }
+                else
+                    if (ute == kd)
+                {
+                    Console.WriteLine("USER WIN");
+                    i = saq + 1;
+                }
+                if (ute == 1)
+                    ute = args.Length;
+                else
+                    ute--;
 
-            //Console.WriteLine("Вы выбрали" + Console.ReadLine());
+                if (ce == args.Length)
+                    ce = 1;
+                else
+                    ce++;
+              }
+              Console.WriteLine("HMAC KEY: " + my_key);
+              Console.WriteLine("USER SELECT  " + ncs + " -  " + args[ncs - 1]);
+              Console.WriteLine("PC SELECT  " + value + " -  " + args[value - 1]);
+              }
 
-            //Console.WriteLine(share[0]);
 
-
-
-
-
-        }
     }
 }
