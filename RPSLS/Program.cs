@@ -15,16 +15,17 @@ namespace ROCKPAPERSCISSORS
 
             int pros = 0;
             int ncs = 0;
+            var uniqueItemsList = args.Distinct().ToList();
             if (args.Length >= 3 & args.Length % 2 != 0)
             {
                 for (int c = 1; c < args.Length; c++)
                 {
-                    if (args[pros] == args[c])
+                    if (uniqueItemsList.Count != args.Length)
                     {
                         Console.WriteLine("Arguments not unique");
                         Environment.Exit(0);
                     }
-                    if (c == 4 && args[pros] != args[pros + 1])
+                    if (args[pros] != args[pros + 1])
                     {
                         pros++;
                         c = pros;
@@ -56,7 +57,6 @@ namespace ROCKPAPERSCISSORS
                 Console.WriteLine(op + " - " + s.ToString());
                 op++;
               }
-              Console.WriteLine("PC select: " + value);
               Console.WriteLine("Select one arg");
               ncs = Convert.ToInt32(Console.ReadLine());
               if (ncs == 0)
