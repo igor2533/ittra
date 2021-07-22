@@ -13,7 +13,7 @@ namespace ROCKPAPERSCISSORS
         static void Main(string[] args)
         {
 
-            int pros = 0;
+           
             int ncs = 0;
             var uniqueItemsList = args.Distinct().ToList();
             if (args.Length >= 3 & args.Length % 2 != 0)
@@ -25,11 +25,7 @@ namespace ROCKPAPERSCISSORS
                         Console.WriteLine("Arguments not unique");
                         Environment.Exit(0);
                     }
-                    if (args[pros] != args[pros + 1])
-                    {
-                        pros++;
-                        c = pros;
-                    }
+                  
                 }
             }
             else
